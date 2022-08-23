@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+  <h1 style="text-align:center">
+    DFS(Depth First Search)
+  </h1>
+  <div style="width:100%; padding-bottom:56.25%; position:relative;">
+      <iframe src="{%url 'P5_snake' %}" style="position:absolute; top:0px; left:0px; 
+            width:700px; height:700px; border: none; overflow: hidden;"></iframe>
+
+
+  </div>
+
+         
+{%endblock content%}
+
+
+{% block sidebar%}
+<h2> Overview of Implemntaion </h2>
+
+<ol style = "color:white;">
+<li>It has 8X8 grid, hence matrix of 8 rows and 8 column holds food location and snake locations</li>
+<li>Starting from snake head, food is searched in dfs manner i.e going (i-1,j-1,i+1,j+1) recursively given all this is valid location in matrix to go.</li>
+<li>A valid location is one which do not contains snake body or is not a bounday</li>
+<li> When food is reached, algorithm back-track the nodes visited to reach here. Now it is converted into list of direction.
+<li>These list of directions along with snake positions is appended into list, until snake do not find a valid path to food, this is when the algorithm stops.</li>
+
+</ol>
+{% endblock sidebar%}

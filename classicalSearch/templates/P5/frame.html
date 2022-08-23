@@ -1,0 +1,229 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Snake Game</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
+    {% comment %} <script type="text/javascript" src="{% static 'sketch.js' %}">        {% endcomment %}
+    </script>
+
+    {% comment %} <script type="text/javascript" src="{% static 'snake.js' %}"></script> {% endcomment %}
+    <style>
+    #score{
+      display:block;
+      padding: 10px 20px;
+      border-color:#bbb #888 #666 #aaa;
+      border-width:3px 4px 4px 3px;
+      width:200px;
+      height:2em;
+      background:#d8ddeb;
+      color:#333;
+      line-height:2;
+      text-align:center;
+      text-decoration:none;
+      font-weight:900;
+    }
+
+.btn {
+  background-color: yellow;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+   width:240px;
+  text-align: center;
+  color:red;
+  font-size: 20px;
+  
+  opacity: 1;
+  transition: 0.3s;
+
+}
+.btn:hover { background-color: orange;}
+
+    </style>
+  </head>
+  <body>
+  <main>
+  </main> 
+        
+        <div id="score" > Score: 0</div>
+        <form action = "#" method = "get">
+          <a><input type = "submit" onclick="openAnalyse()" class = "btn" value = "Analyse", name = "mybtn"> </a>
+        </form>
+       
+        <script>
+
+              function Snake() {
+                this.x = 0;
+                this.y = 0;
+                this.sx = 1;
+                this.sy = 0;
+                this.total = 0;
+                this.tail = [];
+
+                this.foodconsume = function(pos) {
+                  let d = dist(this.x, this.y, pos.x, pos.y);
+                  if (d < 1) {
+                    this.total++;
+                    document.getElementById('score').innerHTML = "Score: " + this.total;
+                    return true;
+                  } else {
+                    return false;
+                  }
+                };
+
+                this.dir = function(x, y) {
+                  this.sx = x;
+                  this.sy = y;
+                };
+
+                this.finish = function() {
+                  for (let i = 0; i < this.tail.length; i++) {
+                    let pos = this.tail[i];
+                    let d = dist(this.x, this.y, pos.x, pos.y);
+                    if (d < 1) {
+                      console.log('Snake Dead', this.x, this.y, pos.x, pos.y, d);
+                      //show to total score
+                      document.getElementsByClassName('.score').innerHTML = "Score: " + this.total;
+                      noLoop(); 
+                      this.total = 0;
+                      this.tail = [];
+                      postion_index = 0;// postion_index reinitialized
+                      current_list = 0;//list reinitialized
+                      
+
+                    }
+                  }
+                };
+
+                this.update = function() {
+                  if(this.total === this.tail.length){
+                    for (let i = 0; i < this.tail.length - 1; i++) {
+                      this.tail[i] = this.tail[i + 1];
+                    }
+                  }
+                  if (this.total >= 1) {
+                    
+                    this.tail[this.total - 1] = createVector(this.x, this.y);
+                    
+                  }
+
+                  this.x = this.x + this.sx * scl;
+                  this.y = this.y + this.sy * scl;
+
+                  this.x = constrain(this.x, 0, width - scl);
+                  this.y = constrain(this.y, 0, height - scl);
+                };
+
+                this.show = function() {
+                  fill(255);
+                  for (let i = 0; i < this.tail.length; i++) {
+                    rect(this.tail[i].x, this.tail[i].y, scl, scl);
+                  }
+                  rect(this.x, this.y, scl, scl);
+                };
+              }
+
+              let s;
+              let scl = 30;
+              let food;
+              let postion_index = 0;
+              let current_dir_list_length = 0;
+              let current_dir_list_index = 0;
+              let number_of_dir_list = 0;
+              let current_list = 0;
+              let all_position;
+              let all_direction; 
+              let w = 240;
+              let search = ""
+              function setup() {
+                document.getElementsByClassName('.progress').innerHTML = w/scl;
+                console.log({{all_position}});
+                console.log({{all_direction}})
+                search = "{{search}}"
+                //alert(search)
+                convert_to_p5({{all_position}}, {{all_direction}} );
+                createCanvas(w,w);
+                s = new Snake();
+                frameRate(6);              
+                current_dir_list_length = all_direction[current_list].length;
+                number_of_direction_list = all_direction.length;
+                pickLocation(all_position[postion_index][0], all_position[postion_index][1]);
+                          
+              }
+              var toggle = 1;
+              function mousePressed() {
+                if (toggle === 1) {
+                  noLoop();
+                  toggle = 0;
+                } else {
+                  loop();
+                  toggle = 1;
+                }
+              }
+              function pickLocation(x, y) {
+                food = createVector(x,y);
+                console.log(all_position[postion_index][0], all_position[postion_index][1]);
+                
+                food.mult(scl);
+              }
+            
+              function draw() {
+                background(51);
+                if (s.foodconsume(food)){
+                  postion_index++;
+                  current_list++;//when food eat then change to new list 0th index
+                  current_dir_list_index = 0;
+                  pickLocation(all_position[postion_index][0], all_position[postion_index][1]);
+                }
+                if((all_position.length)-1 == postion_index){
+                  noLoop();
+                  toggle = 0;
+                }
+                motion(all_direction[current_list][current_dir_list_index]);                
+                current_dir_list_index++;
+                s.finish();
+                s.update();
+                s.show();
+                fill(255, 250, 20);
+                rect(food.x, food.y, scl, scl);
+                
+              }
+              
+              function motion(turn) {
+                if (turn === 8) {
+                  s.dir(0, -1);
+                  console.log("up");
+                } else if (turn === 2) {
+                  console.log("dn");
+                  s.dir(0, 1);
+                } else if (turn === 6) {
+                  console.log("right");
+                  s.dir(1, 0);
+                } else if (turn === 4) {
+                  console.log("left");
+                  s.dir(-1, 0);
+                }
+              }
+
+              function convert_to_p5(p,d){
+                all_position = [];
+                all_direction = d;
+                for(var i=0; i < p.length; i++){
+                    //iniitalize food position
+                    append(all_position,[p[i][1]-1, p[i][0]-1]);//transpose in p5
+                    //console.log(t,"ooooooo");
+                    //for(var j=0; j< all_direction[i].length; j++){
+                      //motion(all_direction[i][j]);          
+                    //}
+                }
+              }
+              function openAnalyse() {
+                window.open({%url 'search-analyse' %});
+              }
+        </script>
+         
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+  <h1 style="text-align:center">
+    Analysis of {{search}}
+  </h1>
+  <div style="width:100%; padding-bottom:56.25%; position:relative;">
+      
+  <img src="{% static image_path_score %}" height = "300px" width = "400px">
+
+  <img src="{% static image_path_time %}" height = "300px" width = "400px">
+
+  </div>
+
+         
+{%endblock content%}
+
+
+

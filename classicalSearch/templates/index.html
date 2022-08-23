@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content%}
+<style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button4 {border-radius: 12px;}
+
+</style>
+  <h1 style="text-align:left">
+  Team - DecEpTicoNs</br> </h1>
+  </hr>
+<h4 style="color:yellow">
+Ayush Gupta (203050034)</br>
+Piyush Sharma (203050055)</br>
+Saurabh Telure (203050107)</br>
+Tarun Saurabh (203050009)</br>
+</h4>
+
+<div id = "about" style = "color : pink; font-size:14px">
+<ol>
+<li style = "color : green; font-size:20px">Depth First Search(DFS)</li>
+Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. The algorithm starts at the root node (selecting some arbitrary node as the root node in the case of a graph) and explores as far as possible along each branch before backtracking.(wikipedia)
+<li style = "color : green; font-size:20px">Beadth First Search(DFS)</li>
+Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures. It starts at the tree root (or some arbitrary node of a graph, sometimes referred to as a 'search key'), and explores all of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level.(wikipedia)
+<li style = "color : green; font-size:20px">A* Search</li>
+A* (pronounced "A-star") is a graph traversal and path search algorithm, which is often used in many fields of computer science due to its completeness, optimality, and optimal efficiency. One major practical drawback is its O(b^d) space complexity, as it stores all generated nodes in memory. Thus, in practical travel-routing systems, it is generally outperformed by algorithms which can pre-process the graph to attain better performance, as well as memory-bounded approaches; however, A* is still the best solution in many cases.
+<li style = "color : green; font-size:20px">Hamiltonian Path</li>
+In the mathematical field of graph theory, a Hamiltonian path (or traceable path) is a path in an undirected or directed graph that visits each vertex exactly once. A Hamiltonian cycle (or Hamiltonian circuit) is a Hamiltonian path that is a cycle. Determining whether such paths and cycles exist in graphs is the Hamiltonian path problem, which is NP-complete.
+<li style = "color : green; font-size:20px">Hamiltonian Cycle</li>
+In the mathematical field of graph theory, a Hamiltonian path (or traceable path) is a path in an undirected or directed graph that visits each vertex exactly once. A Hamiltonian cycle (or Hamiltonian circuit) is a Hamiltonian path that is a cycle. Determining whether such paths and cycles exist in graphs is the Hamiltonian path problem, which is NP-complete.
+</ol>
+</div>
+ 
+{%endblock content%}
+
+{% block sidebar %}
+<a href="{%url 'search-analyse-all' %}"><button class="button button4">Overall Analysis</button></a>
+
+{% endblock sidebar%}

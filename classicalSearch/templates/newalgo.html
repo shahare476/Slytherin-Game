@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+  <h1 style="text-align:center">
+   Hamiltonian cycle
+  </h1>
+  <div style="width:100%; padding-bottom:56.25%; position:relative;">
+      <iframe src="{%url 'P5_snake' %}" style="position:absolute; top:0px; left:0px; 
+            width:700px; height:700px; border: none; overflow: hidden;"></iframe>
+
+
+  </div>
+
+         
+{%endblock content%}
+{% block sidebar%}
+<h2> Overview of Implemntaion </h2>
+
+<ol style = "color:white;">
+<li>It has 8X8 grid, hence matrix of 8 rows and 8 column holds food location and snake locations</li>
+<li>Starting from inital snake position(i.e at 0,0), a path back to tail is generated.</li>
+<li>two adjecent node are expanded so that path returning to the snake is increased.</li>
+<li>The above step is done until all vertex is covered once(hamiltonian cycle)</li>
+<li>(Note: snake will cover the board only if it can cover all vertex, therefore snake has to trace the same hamiltonian cycle again and again at least when it is long enough)<li>
+
+</ol>
+{% endblock sidebar%}

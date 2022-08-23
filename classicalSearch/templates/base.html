@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>AISearch</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="{% static 'classicalSearch/style.css' %}" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          
+          <h1><a href="{%url 'search-home' %}">AI<span class="logo_colour">Search</span></a></h1>
+          <h3>CS 621 project</h3>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          
+          <li><a href="{%url 'search-home' %}">Home</a></li>
+          <li><a href="{%url 'dfs-home' %}">DFS</a></li>
+          <li><a href="{%url 'bfs-home' %}">BFS</a></li>
+          <li><a href="{%url 'astar-home' %}">A-Star</a></li>
+          <li><a href="{%url 'hamilton-home' %}">Hamiltonian</a></li>
+          <li><a href="{%url 'hamilton-cycle' %}">Hamiltonian cycle</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div class="sidebar">
+         {% block sidebar %}{% endblock %}
+      </div>
+      <div id="content">
+        
+        {% block content %}{% endblock %}
+         
+      </div>
+    </div>
+    
+  </div>
+</body>
+</html>

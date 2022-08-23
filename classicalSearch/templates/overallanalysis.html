@@ -1,0 +1,31 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+  <h1 style="text-align:center">
+   Overall Analysis (Static Page)
+  </h1>
+  <div style="width:100%; padding-bottom:56.25%; position:relative;">
+     <img src="{% static "classicalSearch/all_in_one/s.png" %}" height = "300px" width = "400px">
+
+     <img src="{% static "classicalSearch/all_in_one/t.png" %}" height = "300px" width = "400px">
+
+  </div>
+{%endblock content%}
+{% block sidebar%}
+     <img style="padding:10px 20px 20px 20px;" src="{% static "classicalSearch/all_in_one/m.png" %}" height = "100px" width = "150px">
+</br></br>
+<h2> Overall Analysis </h2>
+
+<ol style = "color:white;">
+<li>Most time is taken by Hamiltonian path, as we perform one bfs to find a path between head and tail, then converting that path to  hamiltonian path takes exponential time complexity, hence the highest.</li>
+<li>Least time is consumed by hamiltonian cycle and dfs, hamiltonian cycle consumes least time because we find cycle for only one iteration, and after that for next subsequent iteration linear time is consumed.</li>
+<li>DFS performs worst in average score of the snake.</li>
+<li>BFS and Astar is nearly same as both algorithm have some similarity between search patterns.</li>
+<li>Hamiltonian path is significantly larger score than other two, as it tries to visit all vertex hence minimize chance of not finding path.</li>
+<li>Hamiltonian gives perfect score because it always tries to visit all nodes and hence will have score equal to all node.</li>
+
+
+
+</ol>
+{% endblock sidebar%}
